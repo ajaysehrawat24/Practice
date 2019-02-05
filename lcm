@@ -1,0 +1,32 @@
+package practice;
+
+public class lcm {
+	int lcm(int a,int b)
+	{
+		int f=0;
+		if(a==b)
+		{
+			return a;
+		}
+		int max=(a>b)?a:b;
+
+		for(int i=0;i<10000;i++)
+  		{
+			if((max%a==0) && (max%b==0))
+			{
+				return max;
+				
+			}
+			max+=1;
+		}
+
+	return 0;
+	}
+	public static void main(String[] args) 
+	{
+		int a=15,b=20;
+		lcm o=new lcm();
+		System.out.println(o.lcm(a, b));
+	}
+
+}
