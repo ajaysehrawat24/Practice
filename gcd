@@ -1,0 +1,26 @@
+package practice;
+
+public class gcd 
+{
+	int g(int a,int b)
+	{
+		int r;
+		r=a%b;
+		if(r==0)
+		{
+			return b;
+		}
+		else 
+			return g(b,r);
+}
+	public static void main(String[] args)
+	{
+		int a=25,b=20;
+		gcd o=new gcd();
+		if(a>b)
+		System.out.println(o.g(a,b));
+		else
+		System.out.println(o.g(b,a));
+	}
+
+}
