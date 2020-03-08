@@ -1,0 +1,21 @@
+public class Test {
+    public static void main(String[] args) {
+        int arr[] ={1,2,3,4,5,4,3,2,1};
+        System.out.println(pallindrome(arr));
+    }
+
+    private static boolean pallindrome(int arr[]){
+        boolean flag = true;
+    int mid = arr.length/2;
+    int k=mid;
+    int j=mid;
+    for(int i=0;i<=mid;i++){
+        if(arr[j]!= arr[k]){
+            flag = false;
+        }
+        j--;
+        k++;
+    }
+    return flag;
+    }
+}
