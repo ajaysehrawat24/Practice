@@ -1,0 +1,60 @@
+package com.pack.tree;
+
+
+public class Trie{
+	static TrieNode root;	
+	public static void insert(String key) {
+		int level;
+		int length = key.length();
+		int index;
+		TrieNode crawler = root;
+		for(level = 0;level<length;level++) {
+			//a starts from 97 so a-97 = 0
+			//here data is stored as index of array
+			index = key.charAt(level)-'a';
+			if(crawler.children[index]==null) {
+				crawler.children[index]=new TrieNode();
+			}
+			crawler = crawler.children[index];
+		}
+		crawler.isTerminating = true;
+	}
+
+	public static boolean search(String key) {
+		TrieNode crawler = root;
+		int level;
+		int length = key.length();
+		int index;
+		for(level=0;level<length;level++) {
+
+			index = key.charAt(level)-'a';
+			if(crawler.children[index]== null) {
+				return false;
+			}
+			crawler= crawler.children[index];
+		}
+		return (crawler.isTerminating && crawler != null);
+	}
+
+	public static void main(String[] args) {
+		root = new TrieNode();
+		String items[] = {"the", "am", "there", "answer"};
+		for (String key : items) {
+			insert(key);	
+		}
+		System.out.println(search("amk"));
+	}
+}
+
+class TrieNode{
+	final int ALPHABET_SIZE = 26;
+	TrieNode children[] = new TrieNode[ALPHABET_SIZE];
+	boolean isTerminating;
+	TrieNode() {
+		this.isTerminating = false;
+		for(int i=0;i<26;i++) {
+			this.children[i]=null;
+		}
+	}
+}
+
