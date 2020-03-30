@@ -1,0 +1,81 @@
+package com.pack.tree;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
+public class MirrorTree {
+	static MirrorNode root;
+	public void getMirrorTree(MirrorNode root) {
+		if (root == null) {
+			return;
+		}
+		getMirrorTree(root.left);
+		getMirrorTree(root.right);
+		MirrorNode temp;
+		temp = root.left;
+		root.left = root.right;
+		root.right = temp;
+
+	}
+
+	public void display(MirrorNode root){
+
+
+		List<MirrorNode> visited = new ArrayList<MirrorNode>();
+		Queue<MirrorNode> notVisited = new LinkedList<MirrorNode>();
+		notVisited.add(root);
+		while(!notVisited.isEmpty()) {
+			MirrorNode queHead= notVisited.remove();
+			if(!visited.contains(queHead)) {
+				visited.add(queHead);
+				System.out.print(queHead.data+",");
+				if(queHead.left!=null) {
+					notVisited.add(queHead.left);
+				}
+				if(queHead.left!=null) {
+					notVisited.add(queHead.right);
+				}
+			}
+		}
+
+	}
+
+	public static void main(String[] args) {
+		MirrorTree mt = new MirrorTree();
+		root = new MirrorNode(10);
+		MirrorNode b = new MirrorNode(20);
+		MirrorNode c = new MirrorNode(30);
+		MirrorNode d = new MirrorNode(40);
+		MirrorNode e = new MirrorNode(50);
+		MirrorNode f = new MirrorNode(60);
+		MirrorNode g = new MirrorNode(70);
+		root.left = b;
+		root.right = c;
+		root.left.left = d;
+		root.left.right = e;
+		root.right.left=f;
+		root.right.right=g;
+		mt.display(root);
+		mt.getMirrorTree(root);
+		System.out.println();
+		mt.display(root);
+
+
+	}
+}
+
+class MirrorNode{
+	int data;
+	MirrorNode left;
+	MirrorNode right;
+	public MirrorNode(int item) {
+		this.data = item;
+		this.left = null;
+		this.right = null;
+	}
+
+
+
+}
