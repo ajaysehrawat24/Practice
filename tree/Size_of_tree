@@ -1,0 +1,41 @@
+package com.pack.tree;
+
+public class SizeTree {
+	public static void main(String[] args) {
+		SizeNode a = new SizeNode();
+		SizeNode b = new SizeNode();
+		SizeNode c = new SizeNode();
+		SizeNode d = new SizeNode();
+		SizeNode e = new SizeNode();
+		SizeNode f = new SizeNode();
+		SizeNode g = new SizeNode();
+		SizeNode h = new SizeNode();
+		a.left = b;
+		a.right = c;
+		b.left = d;
+		b.right = e;
+		c.left = f;
+		c.right = g;
+		d.left = h;
+		System.out.println(a.getSize(a));
+	}
+}
+
+
+class SizeNode{
+	SizeNode left;
+	SizeNode right;
+	int count = 0;
+	public SizeNode() {
+		this.left = null;
+		this.right = null;
+	}
+
+	public int  getSize(SizeNode root) {
+		if(root == null) {
+			return 0 ;
+		}
+		return getSize(root.left)+1+ getSize(root.right);
+	}
+
+}
