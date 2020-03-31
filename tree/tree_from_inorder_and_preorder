@@ -1,0 +1,60 @@
+public class BinaryTree{
+static int primeIndex=0;
+static Node root;
+private Node buildTree(char in[], char pre[], int low, int high){
+	if(low>high){
+		return null;
+	}
+	Node tNode = new Node(pre[primeIndex++]);
+
+	if(low==high){
+		return tNode;
+	}	
+	int rootIndex = search(in, low, high, tNode.data);
+	tNode.left = buildTree(in, pre, low, rootIndex-1);
+	tNode.right = buildTree(in, pre, rootIndex+1,high );
+	return tNode;
+}
+
+
+private int search(char in[], int low, int high, int data){
+	int i;
+	for(i=low; i<=high; i++){
+		if(in[i]==data){
+			return i;
+		}
+	}
+	return i;
+}	
+
+private void inorder(Node root){
+	if(root == null){
+		return ;
+	}
+	inorder(root.left);
+	System.out.println((char)root.data);
+	inorder(root.right);
+
+}
+public static void main(String args[]){
+	BinaryTree tree = new BinaryTree();
+        char in[] = new char[] { 'D', 'B', 'E', 'A', 'F', 'C' };
+        char pre[] = new char[] { 'A', 'B', 'D', 'E', 'C', 'F' };
+        int len = in.length;
+	root = tree.buildTree(in,pre,0,len-1);
+	System.out.println("Constructing tree --------------");
+	tree.inorder(root);
+	
+}
+}
+class Node{
+        int data;
+        Node left;
+        Node right;
+        Node(int item){
+                this.data = item;
+                this.left = null;
+                this.right = null;
+        }
+}
+
