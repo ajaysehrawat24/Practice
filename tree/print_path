@@ -1,0 +1,54 @@
+package com.pack.tree;
+
+import java.util.Stack;
+
+public class PrintPathTree{
+	Stack<Integer> path = new Stack<Integer>();
+	private int count =1;
+	private void printPath(Node root){
+
+		try {
+
+			if(root==null){
+				if(count==1) {
+					System.out.println(path);
+					count += 1;
+				}
+				else {
+					count = count-1;
+				}
+
+				return;
+			}
+			if(!path.contains(root.data)){
+				path.push(root.data);
+			}
+			printPath(root.left);
+			printPath(root.right);
+			path.pop();
+
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void main(String args[]){
+		PrintPathTree tree = new PrintPathTree();
+		Node a = new Node(1);
+		Node b = new Node(2);
+		Node c = new Node(3);
+		Node d = new Node(4);
+		Node e = new Node(5);
+
+		a.left = b;
+		a.right = c;
+		a.left.left = d;
+		a.left.right = e;
+		tree.printPath(a);
+
+	}
+}
+
+
+
